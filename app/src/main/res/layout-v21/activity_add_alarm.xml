@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme= "@android:style/Theme.Holo.Light.DarkActionBar"
+    tools:context="com.example.com.darckalram.AddAlarm"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        >
+        <Button
+            android:id="@+id/add_Cancle"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Cancle"
+            android:textColor="#ffffff"
+            android:background="#00ffffff"
+            />
+
+        <Button
+            android:id="@+id/add_Save"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Save"
+            android:textColor="#ffffff"
+            android:background="#00ffffff"
+            />
+    </LinearLayout>
+
+
+
+    <TimePicker
+        android:id="@+id/add_timeSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:timePickerMode="clock"
+        >
+    </TimePicker>
+
+    <EditText
+        android:id="@+id/add_nameSet"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textAlignment="center"
+        android:hint="알람의 이름을 설정해주세요."
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <ToggleButton
+            android:id="@+id/add_Sun"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="일"
+            android:textOff="일"
+            >
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/add_Mon"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="월"
+            android:textOff="월">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/add_Tue"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="화"
+            android:textOff="화">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/add_Wed"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="수"
+            android:textOff="수">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/add_Thu"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="목"
+            android:textOff="목">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/add_Fri"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="금"
+            android:textOff="금">
+        </ToggleButton>
+
+        <ToggleButton
+            android:id="@+id/add_Sat"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="토"
+            android:textOff="토">
+        </ToggleButton>
+    </LinearLayout>
+
+</LinearLayout>
