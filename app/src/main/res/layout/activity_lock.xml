@@ -1,21 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
-    <FrameLayout
+
+    <ImageView
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/drag">
-        <ImageView
-            android:id="@+id/ck"
+        android:background="@color/colorPrimary"
+        ></ImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:text="Wake Up"
+            android:id="@+id/workMessage"
+            android:textSize="50dp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
             />
-    </FrameLayout>
+
+        <Button
+            android:id="@+id/dark"
+            android:layout_width="242dp"
+            android:layout_height="245dp"
+            android:background="@drawable/chiken"
+            />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="184dp"
+            android:layout_height="147dp"
+            android:background="@drawable/doma"
+            android:layout_gravity="center"
+            ></ImageView>
+
+    </LinearLayout>
 
 
 
-</LinearLayout>
+
+</FrameLayout>

@@ -21,9 +21,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,75 +33,48 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 /**
  * Created by com on 2017-05-09.
  */
 
+//알람을 해제하는 클래스입니다.
 public class AlramWork extends AppCompatActivity {
 
-    private static final String TAG = "Touch";
-
-    Matrix matrix = new Matrix();
-    private Matrix savedMatrix = new Matrix();
-    private Matrix savedMatrix2 = new Matrix();
-
-    static final int NONE = 0;
-    static final int DRAG = 1;
-
-    int mode = NONE;
-
-    private PointF start = new PointF();
-
-    int width = 0;
-    int height = 0;
-
+    Button button;
+    int touchCount = 0, maxCount = 10;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
-        ImageView view = (ImageView) findViewById(R.id.ck);
 
-        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
+        Random rand = new Random();
 
-         width = dm.widthPixels;
-         height = dm.heightPixels;
+        maxCount = rand.nextInt(11) + 1;
 
-        view.setOnTouchListener(new View.OnTouchListener() {
+        Log.i("dark","alarm is require + "+ (maxCount) +" locked");
+
+
+        button = (Button)findViewById(R.id.dark);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                ImageView view = (ImageView) v;
-
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-                    case MotionEvent.ACTION_DOWN:
-                        savedMatrix.set(matrix);
-                        start.set(event.getX(), event.getY());
-                        Log.d(TAG, "mode=DRAG");
-                        mode = DRAG;
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_POINTER_UP:
-                        mode = NONE;
-                        Log.d(TAG, "mode=NONE");
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        if (mode == DRAG) {
-                            view.setX(event.getX());
-                            view.setY(event.getY());
-                        }
-                        break;
+            public void onClick(View v) {
+                ++touchCount;
+                if(touchCount >= maxCount){
+                    Log.i("dark","alarm is unlocked");
+                    finish();
                 }
-
-                view.setImageMatrix(matrix);
-                return true; // indicate event was handled
+                else{
+                    Log.i("dark","alarm is require + "+ (maxCount - touchCount) +" locked");
+                    Toast.makeText(getApplicationContext(),"알람 해제 까지 " + (maxCount - touchCount) + "번 남았습니다.",Toast.LENGTH_SHORT);
+                }
             }
         });
-
-
     }
 
 

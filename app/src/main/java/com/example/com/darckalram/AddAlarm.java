@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
-
+//알람을 추가하는 클래스 입니다.
 public class AddAlarm extends AppCompatActivity {
 
     private TimePicker timePicker;
@@ -42,7 +42,6 @@ public class AddAlarm extends AppCompatActivity {
         toggleThu = (ToggleButton) findViewById(R.id.add_Thu);
         toggleFri = (ToggleButton) findViewById(R.id.add_Fri);
         toggleSat = (ToggleButton) findViewById(R.id.add_Sat);
-
 
         cancle = (Button)findViewById(R.id.add_Cancle);
 

@@ -5,6 +5,7 @@ package com.example.com.darckalram;
  * Created by com on 2017-05-09.
  */
 
+//리스트뷰 아이템 클래스
 public class ListViewItem {
     private String sun, time, name, days;
     private  boolean isWork;

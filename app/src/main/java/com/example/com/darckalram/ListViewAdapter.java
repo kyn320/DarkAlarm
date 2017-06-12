@@ -16,9 +16,10 @@ import java.util.Timer;
 /**
  * Created by com on 2017-05-09.
  */
-
+//커스텀 리스트뷰 어답터 입니다.
 public class ListViewAdapter extends BaseAdapter {
 
+    //리스트 요소 배열 생성
     ArrayList<ListViewItem> listViewItems = new ArrayList<ListViewItem>();
 
     public ListViewAdapter(){
@@ -72,6 +73,7 @@ public class ListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
+    //요소를 추가 합니다.
     public void addItem(String sun, String name, String time, String days, boolean isWork){
         ListViewItem item = new ListViewItem();
 
@@ -82,6 +84,17 @@ public class ListViewAdapter extends BaseAdapter {
         item.setWork(isWork);
 
         listViewItems.add(item);
+    }
+
+    //요소를 삭제합니다.
+    public boolean RemoveItem(int index){
+        try {
+            listViewItems.remove(index);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
 

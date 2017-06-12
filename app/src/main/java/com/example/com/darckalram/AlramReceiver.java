@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-
+//알람을 받는 리시버 입니다.
 public class AlramReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
