@@ -30,8 +30,6 @@ public class AlramReceiver extends BroadcastReceiver {
 
         Log.i("test","alram is success");
 
-        Toast.makeText(context,"ASD",Toast.LENGTH_LONG).show();
-
         Intent goIntent = new Intent(context, AlramWork.class);
 
         PendingIntent pi = PendingIntent.getActivity(context,0,goIntent,PendingIntent.FLAG_ONE_SHOT);

@@ -24,10 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddAlarm" />
-        <activity android:name=".AlramWork">
-            <category android:name="android.intent.category.DEFAULT"/>
-        </activity>
-
+        <activity android:name=".AlramWork"/>
         <receiver android:name= ".AlramReceiver">
         </receiver>
     </application>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -18,7 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -30,6 +33,8 @@ import java.util.List;
 
 //Main 화면을 호출하는 클래스입니다.
 public class MainActivity extends AppCompatActivity {
+
+    public static MainActivity insatnce;
 
     //알람 매니저
     private AlarmManager alarmManager;
@@ -69,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        insatnce = this;
+
         //초기 로드 상태인가?
         if(!isFirst) {
             getPreferences();
@@ -89,11 +96,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         //커스텀 리스트뷰 등록
         listView.setAdapter(adapter);
         //메뉴 등록
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Switch workSwitch = (Switch) view.findViewById(R.id.workSwitch);
+                workSwitch.setChecked(!workSwitch.isChecked());
+                if(workSwitch.isChecked() == false){
+                    ListViewItem item = (ListViewItem) adapter.getItem(position);
+                    CancleAlarm(item.getID());
+                }
+                savePreferences();
+                updateListView();
+            }
+        });
         registerForContextMenu(listView);
 
+    }
+
+    void CancleAlarm(int id){
+        Intent intent = new Intent(this, AlramReceiver.class);
+        PendingIntent sender = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (sender != null) { alarmManager.cancel(sender); sender.cancel(); }
     }
 
     //리스트 요소를 삭제합니다.
@@ -102,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.RemoveItem(id);
         savePreferences();
         //리스트뷰 업데이트
-        listView.setAdapter(adapter);
     }
 
     @Override
@@ -113,8 +139,12 @@ public class MainActivity extends AppCompatActivity {
         listView.invalidateViews();
     }
 
+    public void updateListView(){
+        listView.setAdapter(adapter);
+    }
+
     // 값 불러오기
-    private void getPreferences(){
+    public void getPreferences(){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String list = pref.getString("list","");
         if(list != "") {
@@ -129,13 +159,14 @@ public class MainActivity extends AppCompatActivity {
                 days
                  */
                     JSONObject obj = json.getJSONObject(i);
+                    int id = obj.getInt("id");
                     String sun = obj.getString("sun");
                     String time = obj.getString("time");
                     String name = obj.getString("name");
                     String days = obj.getString("days");
                     Boolean work = obj.getBoolean("work");
                     //리스트 요소에 등록
-                    adapter.addItem(sun, name, time, days, work);
+                    adapter.addItem(id,sun, name, time, days, work);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -144,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 값 저장하기
-    private void savePreferences(){
+    public void savePreferences(){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
@@ -154,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < adapter.listViewItems.size(); i++)
             {
                 JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+                sObject.put("id",adapter.listViewItems.get(i).getID());
                 sObject.put("sun", adapter.listViewItems.get(i).getSun().toString());
                 sObject.put("time", adapter.listViewItems.get(i).getTime().toString());
                 sObject.put("name", adapter.listViewItems.get(i).getName().toString());

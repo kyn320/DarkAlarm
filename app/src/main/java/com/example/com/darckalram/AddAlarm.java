@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import java.util.Random;
+
 //알람을 추가하는 클래스 입니다.
 public class AddAlarm extends AppCompatActivity {
 
@@ -71,7 +73,11 @@ public class AddAlarm extends AppCompatActivity {
         Intent intent = new Intent(this, AlramReceiver.class);
         intent.putExtra("weekday",week);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,50,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        Random random = new Random();
+
+        int id = random.nextInt(10000) +1;
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,id,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE),timePicker.getHour(),timePicker.getMinute(),calendar.get(Calendar.SECOND));
@@ -128,7 +134,7 @@ public class AddAlarm extends AppCompatActivity {
         }
 
         Log.i("test","alram is work");
-        MainActivity.adapter.addItem(am_pm,nameSet.getText().toString(),hour + " : " + String.format("%02d", timePicker.getMinute() ),days,true);
+        MainActivity.adapter.addItem(id,am_pm,nameSet.getText().toString(),hour + " : " + String.format("%02d", timePicker.getMinute() ),days,true);
 
         startService(intent);
 

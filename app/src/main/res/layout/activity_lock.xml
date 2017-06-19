@@ -10,7 +10,7 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/background"
         ></ImageView>
 
     <LinearLayout
@@ -26,7 +26,7 @@
             android:text="Wake Up"
             android:id="@+id/workMessage"
             android:textSize="50dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="#ffffffff"
             android:layout_gravity="center"
             />
 
@@ -44,10 +44,6 @@
             android:background="@drawable/doma"
             android:layout_gravity="center"
             ></ImageView>
-
     </LinearLayout>
-
-
-
 
 </FrameLayout>

@@ -56,7 +56,7 @@
         android:layout_marginRight="50dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text=""
+        android:text="일어나세요!"
         android:textAlignment="center"
         android:hint="알람의 이름을 설정해주세요."
         />

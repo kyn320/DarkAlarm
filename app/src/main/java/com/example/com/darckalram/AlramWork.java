@@ -19,12 +19,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -54,10 +57,12 @@ public class AlramWork extends AppCompatActivity {
 
         Random rand = new Random();
 
-        maxCount = rand.nextInt(11) + 1;
+        maxCount = rand.nextInt(11) + 3;
 
         Log.i("dark","alarm is require + "+ (maxCount) +" locked");
 
+
+        final Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
 
         button = (Button)findViewById(R.id.dark);
 
@@ -70,11 +75,18 @@ public class AlramWork extends AppCompatActivity {
                     finish();
                 }
                 else{
+
+                    button.startAnimation(shake);
                     Log.i("dark","alarm is require + "+ (maxCount - touchCount) +" locked");
-                    Toast.makeText(getApplicationContext(),"알람 해제 까지 " + (maxCount - touchCount) + "번 남았습니다.",Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),"알람 해제 까지 " + (maxCount - touchCount) + "번 남았습니다.",Toast.LENGTH_SHORT).show();
+
+
                 }
             }
         });
+
+
+
     }
 
 

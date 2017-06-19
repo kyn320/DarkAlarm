@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
 
@@ -56,10 +57,11 @@ public class ListViewAdapter extends BaseAdapter {
         TextView nameText = (TextView) convertView.findViewById(R.id.nameText);
         TextView daysText = (TextView) convertView.findViewById(R.id.daysText);
 
-        Switch workSwitch = (Switch) convertView.findViewById(R.id.workSwitch);
+        final Switch workSwitch = (Switch) convertView.findViewById(R.id.workSwitch);
 
 
-        ListViewItem listViewItem = listViewItems.get(position);
+
+        final ListViewItem listViewItem = listViewItems.get(position);
 
         sunText.setText(listViewItem.getSun());
         timeText.setText(listViewItem.getTime());
@@ -74,9 +76,10 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     //요소를 추가 합니다.
-    public void addItem(String sun, String name, String time, String days, boolean isWork){
+    public void addItem(int id,String sun, String name, String time, String days, boolean isWork){
         ListViewItem item = new ListViewItem();
 
+        item.setID(id);
         item.setSun(sun);
         item.setName(name);
         item.setTime(time);

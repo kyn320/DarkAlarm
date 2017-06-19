@@ -7,8 +7,10 @@ package com.example.com.darckalram;
 
 //리스트뷰 아이템 클래스
 public class ListViewItem {
+    private  int ID;
     private String sun, time, name, days;
     private  boolean isWork;
+    private  boolean[] weeks;
 
     public String getSun() {
         return sun;
@@ -49,4 +51,21 @@ public class ListViewItem {
     public void setWork(boolean work) {
         isWork = work;
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int id) {
+        ID = id;
+    }
+
+    public void setWeeks(boolean[] week){
+        weeks = week;
+    }
+
+    public boolean[] getWeeks(){
+        return weeks;
+    }
+
 }
