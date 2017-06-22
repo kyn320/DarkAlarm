@@ -69,13 +69,17 @@ public class AddAlarm extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public  void onRegist(View v){
         boolean[] week = {false, toggleSun.isChecked(), toggleMon.isChecked(), toggleTue.isChecked(), toggleWed.isChecked(), toggleThu.isChecked(), toggleFri.isChecked(), toggleSat.isChecked()};
-
+        //알람 intent를 지정합니다.
         Intent intent = new Intent(this, AlramReceiver.class);
         intent.putExtra("weekday",week);
+        intent.putExtra("msg",nameSet.getText().toString());
 
         Random random = new Random();
 
         int id = random.nextInt(10000) +1;
+
+
+        intent.putExtra("id",id);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,id,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -84,7 +88,8 @@ public class AddAlarm extends AppCompatActivity {
 
         long oneDay = 24 * 60 * 60 * 1000;
 
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //알람 세팅
+        AlarmManager alarmManager = MainActivity.alarmManager;
         alarmManager.setRepeating(alarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,oneDay,pendingIntent);
 
         String am_pm = "";
@@ -110,7 +115,7 @@ public class AddAlarm extends AppCompatActivity {
                 {
                     case 1:
                         days += "일 ";
-                                break;
+                        break;
                     case 2:
                         days += "월 ";
                         break;
@@ -134,8 +139,9 @@ public class AddAlarm extends AppCompatActivity {
         }
 
         Log.i("test","alram is work");
-        MainActivity.adapter.addItem(id,am_pm,nameSet.getText().toString(),hour + " : " + String.format("%02d", timePicker.getMinute() ),days,true);
-
+        //리스트에 등록
+        MainActivity.adapter.addItem(id,am_pm,nameSet.getText().toString(),timePicker.getHour(),timePicker.getMinute(),days,true,week);
+        //서비스 시작
         startService(intent);
 
         finish();

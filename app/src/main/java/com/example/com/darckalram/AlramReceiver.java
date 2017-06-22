@@ -16,13 +16,16 @@ import android.widget.Toast;
 public class AlramReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        //요일 세팅
         boolean[] week = intent.getBooleanArrayExtra("weekday");
+        //아이디
+        int id = intent.getIntExtra("id",0);
+        String msg = intent.getStringExtra("msg");
 
         Calendar calendar = Calendar.getInstance();
 
         Log.i("test","alram is work");
-
+        //요일이 맞지 않는 경우
         if(!week[calendar.get(Calendar.DAY_OF_WEEK)]){
             return;
         }
@@ -31,8 +34,8 @@ public class AlramReceiver extends BroadcastReceiver {
         Log.i("test","alram is success");
 
         Intent goIntent = new Intent(context, AlramWork.class);
-
-        PendingIntent pi = PendingIntent.getActivity(context,0,goIntent,PendingIntent.FLAG_ONE_SHOT);
+        goIntent.putExtra("msg",msg);
+        PendingIntent pi = PendingIntent.getActivity(context,id,goIntent,PendingIntent.FLAG_ONE_SHOT);
 
         try{
             Log.i("test","asdqwe");

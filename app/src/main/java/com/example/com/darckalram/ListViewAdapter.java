@@ -59,12 +59,19 @@ public class ListViewAdapter extends BaseAdapter {
 
         final Switch workSwitch = (Switch) convertView.findViewById(R.id.workSwitch);
 
-
-
         final ListViewItem listViewItem = listViewItems.get(position);
 
         sunText.setText(listViewItem.getSun());
-        timeText.setText(listViewItem.getTime());
+
+        int hour = listViewItem.getHour();
+
+        if(listViewItem.getHour() > 12){
+            hour -= 12;
+            if(hour == 0)
+                ++hour;
+        }
+
+        timeText.setText(hour + " : " + String.format("%02d", listViewItem.getMin() ));
         nameText.setText(listViewItem.getName());
 
         String days = listViewItem.getDays();
@@ -76,15 +83,17 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     //요소를 추가 합니다.
-    public void addItem(int id,String sun, String name, String time, String days, boolean isWork){
+    public void addItem(int id,String sun, String name, int hour, int min, String days, boolean isWork,boolean[] weeks) {
         ListViewItem item = new ListViewItem();
 
         item.setID(id);
         item.setSun(sun);
         item.setName(name);
-        item.setTime(time);
+        item.setHour(hour);
+        item.setMin(min);
         item.setDays(days);
         item.setWork(isWork);
+        item.setWeeks(weeks);
 
         listViewItems.add(item);
     }

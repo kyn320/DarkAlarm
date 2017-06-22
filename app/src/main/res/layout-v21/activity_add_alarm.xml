@@ -14,7 +14,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         >
         <Button
             android:id="@+id/add_Cancle"
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Cancle"
+            android:text="취소"
             android:textColor="#ffffff"
             android:background="#00ffffff"
             />
@@ -33,21 +33,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Save"
+            android:text="저장"
             android:textColor="#ffffff"
             android:background="#00ffffff"
             />
     </LinearLayout>
 
 
-
     <TimePicker
         android:id="@+id/add_timeSet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:timePickerMode="clock"
-        >
-    </TimePicker>
+        android:timePickerMode="clock"></TimePicker>
 
     <EditText
         android:id="@+id/add_nameSet"

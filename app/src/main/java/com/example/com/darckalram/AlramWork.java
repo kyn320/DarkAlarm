@@ -47,6 +47,7 @@ import java.util.Random;
 public class AlramWork extends AppCompatActivity {
 
     Button button;
+    TextView textView;
     int touchCount = 0, maxCount = 10;
 
 
@@ -61,11 +62,14 @@ public class AlramWork extends AppCompatActivity {
 
         Log.i("dark","alarm is require + "+ (maxCount) +" locked");
 
+        textView = (TextView)findViewById(R.id.workMessage);
+        textView.setText(getIntent().getStringExtra("msg"));
 
         final Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
 
         button = (Button)findViewById(R.id.dark);
 
+        //버튼 애니메이션 처리
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +82,7 @@ public class AlramWork extends AppCompatActivity {
 
                     button.startAnimation(shake);
                     Log.i("dark","alarm is require + "+ (maxCount - touchCount) +" locked");
-                    Toast.makeText(getApplicationContext(),"알람 해제 까지 " + (maxCount - touchCount) + "번 남았습니다.",Toast.LENGTH_SHORT).show();
-
-
+                    //Toast.makeText(getApplicationContext(),"알람 해제 까지 " + (maxCount - touchCount) + "번 남았습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
         });

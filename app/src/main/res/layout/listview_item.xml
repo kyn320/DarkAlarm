@@ -30,7 +30,6 @@
             />
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/nameText"
         android:layout_marginLeft="15dp"
@@ -49,12 +48,14 @@
         android:orientation="vertical"
         android:layout_weight="1"
         >
+
         <Switch
             android:id="@+id/workSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            />
+            ></Switch>
+
         <TextView
             android:id="@+id/daysText"
             android:layout_width="wrap_content"
